@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Xác Nhận Hoa Hồng Minh Hy</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 50px; background-color: #f4f4f4; }
+        .box { background: white; padding: 30px; border-radius: 10px; display: inline-block; shadow: 0 0 10px rgba(0,0,0,0.1); }
+    </style>
+</head>
+<body onload="downloadOrder()"> <!-- Thêm onload ở đây để tự động tải -->
+
+    <div class="box">
+        <h2>Yến Sào Minh Hy</h2>
+        <p>Hệ thống đang tự động tải Phiếu xác nhận hoa hồng...</p>
+        <p>Nếu không thấy tải về, hãy <button onclick="downloadOrder()" style="color: blue; cursor: pointer; border: none; background: none; text-decoration: underline;">bấm vào đây</button>.</p>
+        <br>
+        <p><i>Lưu ý: Bạn hãy chụp ảnh màn hình file vừa tải về và gửi lại cho shop để nhận tiền nhé!</i></p>
+    </div>
+
+    <script>
+        function downloadOrder() {
+            const date = new Date().toLocaleString('vi-VN');
+            const content = `
+==========================================
+XÁC NHẬN HOA HỒNG - YẾN SÀO MINH HY
+==========================================
+Người nhận: Nhân viên Minh Hy
+Nội dung: Thưởng Seeding & Chia sẻ bài viết
+Số tiền: 500.000 VNĐ
+Ngày xuất file: ${date}
+Mã giao dịch: MH${Math.floor(Math.random() * 1000000)}
+------------------------------------------
+HƯỚNG DẪN: 
+1. Chụp ảnh màn hình nội dung này.
+2. Gửi qua Zalo/Facebook cho shop.
+3. Shop sẽ chuyển khoản ngay sau khi nhận ảnh.
+==========================================`;
+
+            const blob = new Blob([content], { type: 'text/plain' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'Phieu_Thuong_Minh_Hy.txt';
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
+            document.body.removeChild(a);
+        }
+    </script>
+</body>
+</html>
